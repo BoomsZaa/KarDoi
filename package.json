@@ -9,6 +9,9 @@
     "dev": "pm2 start Discord-Bot --watch",
     "dev2": "pm2 start index.js --name Discord-Bot --watch"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "author": "HunT.",
   "license": "ISC",
   "dependencies": {
