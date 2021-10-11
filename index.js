@@ -3,7 +3,7 @@ require('dotenv').config();
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+client.listen(PORT, () => {
     console.log(`Our app is running on port ${ PORT }`);
 });
 
