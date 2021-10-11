@@ -11,7 +11,7 @@ client.events = new Discord.Collection();
 
 client.on('ready', () => {
   // console.log(`Logged in as ${client.user.tag}!`);
-  client.user.setActivity('$help, $h');
+  client.user.setActivity('$help, มึงคิดว่ากูฉลาดมากหรือไง');
 });
 
 client.login(process.env.DISCORD_TOKEN);

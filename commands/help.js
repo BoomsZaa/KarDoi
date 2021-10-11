@@ -3,6 +3,7 @@ module.exports = {
     aliases: ['h'],
     description: "Embeds!",
     async execute(message, args, cmd, client, Discord) {
+        if(cmd === "help"){
         const newEmbeds = new Discord.MessageEmbed()
         .setColor('#fc00ff')
         .setTitle('Commands')
@@ -13,5 +14,10 @@ module.exports = {
         .setFooter('มึงคิดว่ากูฉลาดมากหรือไง');
 
         message.channel.send(newEmbeds);
+        }
+        
+        if(cmd === 'h'){
+            message.channel.send("Hello World ! ! !");
+          }
     }
 }
