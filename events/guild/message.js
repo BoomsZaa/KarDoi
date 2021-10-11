@@ -2,7 +2,7 @@ require('dotenv').config();
 //create cooldowns map
 const cooldowns = new Map();
 module.exports = (Discord, client, message) => {
-    console.log(`[${message.author.tag}]: ${message.content}`);
+    // console.log(`[${message.author.tag}]: ${message.content}`);
 
     const prefix = process.env.PREFIX;
 
