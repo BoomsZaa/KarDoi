@@ -6,7 +6,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['p','skip', 'stop'], //We are using aliases to run the skip and stop command follow this tutorial if lost: https://www.youtube.com/watch?v=QBUJ3cdofqc
+    aliases: ['skip', 'stop'], //We are using aliases to run the skip and stop command follow this tutorial if lost: https://www.youtube.com/watch?v=QBUJ3cdofqc
     cooldown: 0,
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord){
@@ -23,7 +23,7 @@ module.exports = {
         const server_queue = queue.get(message.guild.id);
 
         //If the user has used the play command
-        if (cmd === 'play' || 'p'){
+        if (cmd === 'play'){
             if (!args.length) return message.channel.send('คุณต้องเพิ่มอาร์กิวเมนต์ที่สอง! `[name or url]`');
             let song = {};
 
