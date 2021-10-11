@@ -2,10 +2,9 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 
-var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
-var server_host = process.env.YOUR_HOST || '0.0.0.0';
-server.listen(server_port, server_host, function() {
-    console.log('Listening on port %d', server_port);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
 });
 
 client.commands = new Discord.Collection();
