@@ -2,9 +2,17 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 
-const PORT = process.env.PORT || 3000;
-client.listen(PORT, () => {
-    console.log(`Our app is running on port ${ PORT }`);
+var express = require('express');
+var app     = express();
+
+app.set('port', (process.env.PORT || 5000));
+
+//For avoidong Heroku $PORT error
+app.get('/', function(request, response) {
+    var result = 'App is running'
+    response.send(result);
+}).listen(app.get('port'), function() {
+    console.log('App is running, server is listening on port ', app.get('port'));
 });
 
 client.commands = new Discord.Collection();
