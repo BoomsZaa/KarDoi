@@ -2,17 +2,12 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 5000
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
+server.listen(server_port, server_host, function() {
+    console.log('Listening on port %d', server_port);
+});
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-  
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 
