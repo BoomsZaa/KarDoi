@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 
+//For Heroku Error R10 fix////////////////////////////////////////////////////////
 var express = require('express');
 var app     = express();
 
@@ -14,6 +15,7 @@ app.get('/', function(request, response) {
 }).listen(app.get('port'), function() {
     console.log('App is running, server is listening on port ', app.get('port'));
 });
+///////////////////////////////////////////////////////////////////////////////////
 
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
