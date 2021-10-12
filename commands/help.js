@@ -9,7 +9,7 @@ module.exports = {
         .setTitle('Commands')
         .setDescription('คำสั่งที่สามารถใช้ได้')
         .addFields(
-            {name: 'All Commands', value: '`help`,`play`,`skip`,`stop`,`leave`,`ping`'},
+            {name: 'All Commands', value: '`help`,`play`,`skip`,`stop`,`leave`,`loop`,`q`,`ping`'},
         )
         .setFooter('มึงคิดว่ากูฉลาดมากหรือไง');
 

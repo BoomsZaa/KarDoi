@@ -6,7 +6,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop'], //We are using aliases to run the skip and stop command follow this tutorial if lost: https://www.youtube.com/watch?v=QBUJ3cdofqc
+    aliases: ['skip', 'stop', 'loop', 'q'], //We are using aliases to run the skip and stop command follow this tutorial if lost: https://www.youtube.com/watch?v=QBUJ3cdofqc
     cooldown: 0,
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord){
@@ -53,7 +53,9 @@ module.exports = {
                     voice_channel: voice_channel,
                     text_channel: message.channel,
                     connection: null,
-                    songs: []
+                    songs: [],
+                    volume: 50,
+                    loop: false
                 }
                 
                 //Add our key and value pair into the global queue. We then use this to get our server queue.
@@ -78,6 +80,8 @@ module.exports = {
 
         else if(cmd === 'skip') skip_song(message, server_queue);
         else if(cmd === 'stop') stop_song(message, server_queue);
+        else if(cmd === 'loop') loop(message, server_queue);
+        else if(cmd === 'q') Queue_song(message, server_queue);
     }
     
 }
@@ -94,7 +98,12 @@ const video_player = async (guild, song) => {
     const stream = ytdl(song.url, { filter: 'audioonly' });
     song_queue.connection.play(stream, { seek: 0, volume: 0.5 })
     .on('finish', () => {
-        song_queue.songs.shift();
+        if(song_queue.loop){
+            song_queue.songs.push(song_queue.songs[0])
+            song_queue.songs.shift();
+        }else{
+            song_queue.songs.shift();
+        }
         video_player(guild, song_queue.songs[0]);
     });
     await song_queue.text_channel.send(`กำลังเล่น **${song.title}**`)
@@ -112,4 +121,30 @@ const stop_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('คุณต้องอยู่ในแชนเนลเพื่อรันคำสั่งนี้!');
     server_queue.songs = [];
     server_queue.connection.dispatcher.end();
+}
+
+const loop = (message, server_queue) => {
+    if (!message.member.voice.channel) return message.channel.send('คุณต้องอยู่ในแชนเนลเพื่อรันคำสั่งนี้!');
+    if(!server_queue){
+        return message.channel.send(`ไม่มีเพลงในเพลย์ลิสต์`);
+    }
+    server_queue.loop = !server_queue.loop
+        if(server_queue.loop === true)
+            message.channel.send("`วนซ้ำ เปิด!`");
+        else
+            message.channel.send("`วนซ้ำ ปิด!`");
+}
+
+const Queue_song = (message, server_queue) => {
+    if(!server_queue){
+        return message.channel.send(`ไม่มีเพลงในเพลย์ลิสต์`);
+    }
+    let nowPlaying = server_queue.songs[0];
+    let qMsg = `กำลังเล่นเพลง : ${nowPlaying.title}\n----------------------------------------\n`
+
+    for(var i = 1; i < server_queue.songs.length; i++){
+        qMsg += `${i}. ${server_queue.songs[i].title}\n`
+    }
+
+    message.channel.send('```' + qMsg + '```');
 }
