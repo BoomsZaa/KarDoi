@@ -54,7 +54,6 @@ module.exports = {
                     text_channel: message.channel,
                     connection: null,
                     songs: [],
-                    volume: 70,
                     loop: false
                 }
                 
@@ -80,8 +79,8 @@ module.exports = {
 
         else if(cmd === 'skip') skip_song(message, server_queue);
         else if(cmd === 'stop') stop_song(message, server_queue);
-        else if(cmd === 'loop') loop(message, server_queue);
-        else if(cmd === 'q') Queue_song(message, server_queue);
+        else if(cmd === 'loop') loop_song(message, server_queue);
+        else if(cmd === 'q') queue_song(message, server_queue);
     }
     
 }
@@ -123,19 +122,19 @@ const stop_song = (message, server_queue) => {
     server_queue.connection.dispatcher.end();
 }
 
-const loop = (message, server_queue) => {
+const loop_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('คุณต้องอยู่ในแชนเนลเพื่อรันคำสั่งนี้!');
     if(!server_queue){
         return message.channel.send(`ไม่มีเพลงในเพลย์ลิสต์`);
     }
     server_queue.loop = !server_queue.loop
         if(server_queue.loop === true)
-            message.channel.send(`วนซ้ำ เปิด!`);
+            message.channel.send("`วนซ้ำ เปิด!`");
         else
-            message.channel.send(`วนซ้ำ ปิด!`);
+            message.channel.send("`วนซ้ำ ปิด!`");
 }
 
-const Queue_song = (message, server_queue) => {
+const queue_song = (message, server_queue) => {
     if(!server_queue){
         return message.channel.send(`ไม่มีเพลงในเพลย์ลิสต์`);
     }
