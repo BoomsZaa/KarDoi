@@ -54,7 +54,7 @@ module.exports = {
                     text_channel: message.channel,
                     connection: null,
                     songs: [],
-                    volume: 50,
+                    volume: 70,
                     loop: false
                 }
                 
@@ -130,9 +130,9 @@ const loop = (message, server_queue) => {
     }
     server_queue.loop = !server_queue.loop
         if(server_queue.loop === true)
-            message.channel.send("`วนซ้ำ เปิด!`");
+            message.channel.send(`วนซ้ำ เปิด!`);
         else
-            message.channel.send("`วนซ้ำ ปิด!`");
+            message.channel.send(`วนซ้ำ ปิด!`);
 }
 
 const Queue_song = (message, server_queue) => {
@@ -140,11 +140,11 @@ const Queue_song = (message, server_queue) => {
         return message.channel.send(`ไม่มีเพลงในเพลย์ลิสต์`);
     }
     let nowPlaying = server_queue.songs[0];
-    let qMsg = `กำลังเล่นเพลง : **${nowPlaying.title}** \n----------------------------------------\n`
+    let qMsg = `กำลังเล่นเพลง : ${nowPlaying.title}\n----------------------------------------\n`
 
     for(var i = 1; i < server_queue.songs.length; i++){
         qMsg += `${i}. ${server_queue.songs[i].title}\n`
     }
 
-    message.channel.send('```bash\n' + qMsg + '\n```');
+    message.channel.send('```' + qMsg + '```');
 }
