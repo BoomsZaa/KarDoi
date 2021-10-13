@@ -17,7 +17,7 @@ module.exports = {
         }
         
         if(cmd === 'h'){
-            message.channel.send("Hello World ! ! !");
+            message.reply('มึงคิดว่ากูฉลาดมากหรือไง!');
           }
     }
 }

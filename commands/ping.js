@@ -3,6 +3,9 @@ module.exports = {
     aliases: ['pong'],
     description: "Ping Test Commands",
     async execute(message, args, cmd, client, Discord) {
-        message.channel.send('มึงคิดว่ากูฉลาดมากหรือไง!');
+        message.reply('Calculating ping. . .').then(resultMessage => {
+            const ping = resultMessage.createdTimestamp - message.createdTimestamp
+            message.reply(`Bot Latency: ${ping}, API Latency: ${client.ws.ping}`)
+        })
     }
 }
